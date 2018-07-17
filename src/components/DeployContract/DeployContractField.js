@@ -217,7 +217,6 @@ const fieldSettingsByName = {
   },
 
   priceFloorSimplified: {
-    label: 'Price Floor',
     initialValue: 0,
     rules: form => {
       return [
@@ -255,7 +254,6 @@ const fieldSettingsByName = {
   },
 
   priceCapSimplified: {
-    label: 'Price Cap',
     initialValue: 150,
     rules: form => {
       return [
@@ -419,12 +417,11 @@ const fieldSettingsByName = {
   },
 
   exchangeApi: {
-    label: 'Exchange Api',
     initialValue: 'Binance',
     rules: [
       {
         required: true,
-        message: 'Please select a exchange api'
+        message: 'Please select an exchange api'
       }
     ],
     extra: 'Available exchange api',

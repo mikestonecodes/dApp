@@ -10,11 +10,11 @@ import { getCollateralTokenAddress } from '../../util/utils';
 const Step = Steps.Step;
 
 const parentColLayout = {
-  lg: {
-    span: 18
+  xl: {
+    span: 8
   },
-  sm: {
-    span: 22
+  md: {
+    span: 12
   },
   xs: {
     span: 24
@@ -148,8 +148,8 @@ class SimplifiedDeployment extends Component {
 
     return (
       <div className="page">
-        <Row type="flex" justify="center">
-          <Col {...parentColLayout}>
+        <Row type="flex" justify="center" style={{ margin: '20px 0' }}>
+          <Col span={18}>
             <Steps
               network={this.props.network}
               current={currentStep}
@@ -160,6 +160,10 @@ class SimplifiedDeployment extends Component {
               <Step title="Expiration" />
               <Step network={this.props.network} title="Deploy" />
             </Steps>
+          </Col>
+        </Row>
+        <Row type="flex" justify="center">
+          <Col {...parentColLayout}>
             <StepAnimation direction={this.state.transitionDirection}>
               {steps.filter((step, index) => currentStep === index)}
             </StepAnimation>
