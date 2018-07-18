@@ -157,10 +157,10 @@ class PricingStep extends BaseStepComponent {
       >
         <h1>Specify Pricing Rules</h1>
         {this.props.isSimplified && (
-          <h2>
+          <h3>
             Current Price of {this.props.symbolName}:{' '}
             <span className="text-primary">{this.props.price}</span>
-          </h2>
+          </h3>
         )}
         {!this.props.isSimplified && (
           <div>
@@ -333,7 +333,9 @@ class ExpirationStep extends BaseStepComponent {
               />
             </div>
           )}
-          <GasPriceField form={form} gaslimit={gas} location={location} />
+          {!isSimplified && (
+            <GasPriceField form={form} gaslimit={gas} location={location} />
+          )}
         </div>
         <BiDirectionalNav text="Deploy Contract" {...this.props} />
       </Form>
@@ -404,6 +406,33 @@ class DataSourceStep extends BaseStepComponent {
 }
 
 DataSourceStep = Form.create()(DataSourceStep);
+
+/**
+ * Step to select appropriate Gas amount for the contract deployment
+ *
+ */
+class GasStep extends BaseStepComponent {
+  render() {
+    const { form, gas, location } = this.props;
+    return (
+      <div>
+        <Form
+          className="step-container"
+          onSubmit={this.handleSubmit.bind(this)}
+          layout="vertical"
+        >
+          <h1>Gas Settings</h1>
+          <div className="step-inner-container">
+            <GasPriceField form={form} gaslimit={gas} location={location} />
+          </div>
+          <BiDirectionalNav text="Deploy Contract" {...this.props} />
+        </Form>
+      </div>
+    );
+  }
+}
+
+GasStep = Form.create()(GasStep);
 
 /*
   *  [WIP] Modifying UX flow for contract deployment to be more
@@ -875,6 +904,7 @@ export {
   PricingStep,
   ExpirationStep,
   DataSourceStep,
+  GasStep,
   DeployStep,
   ExchangeStep
 };
