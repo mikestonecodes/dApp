@@ -77,6 +77,9 @@ class SelectTokenField extends React.Component {
       qtyMultiplier: 10 ** (18 - symbol.priceDecimalPlaces),
       oracleDataSource: 'URL'
     });
+    this.props.form.setFieldsValue({
+      contractName: this.genContractName(symbol)
+    });
   }
 
   genContractName(symbol) {

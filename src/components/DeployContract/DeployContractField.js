@@ -110,7 +110,6 @@ const Hint = props => (
 
 const fieldSettingsByName = {
   contractName: {
-    label: 'Name',
     initialValue: 'ETH/BTC-Kraken_YYYY-MM-DD',
     rules: [
       {
@@ -339,7 +338,6 @@ const fieldSettingsByName = {
   },
 
   expirationTimeStamp: {
-    label: 'Expiration Time',
     initialValue: moment().add(28, 'days'),
     rules: [
       {
@@ -365,7 +363,7 @@ const fieldSettingsByName = {
           );
         }}
         showToday={false}
-        format="YYYY-MM-DD HH:mm:ss ([UTC/GMT]Z)"
+        format="YYYY-MM-DD HH:mm:ss"
         style={{ width: '100%' }}
       />
     )

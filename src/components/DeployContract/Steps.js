@@ -75,7 +75,11 @@ class NameContractStep extends BaseStepComponent {
 
     return (
       <div>
-        <Form onSubmit={this.handleSubmit.bind(this)} layout="vertical">
+        <Form
+          onSubmit={this.handleSubmit.bind(this)}
+          layout="vertical"
+          hideRequiredMark={true}
+        >
           <h1>Contract Name and Collateral Token</h1>
           <div>
             MARKET allows users to create user defined derivative contracts by
@@ -98,7 +102,6 @@ class NameContractStep extends BaseStepComponent {
             <br />
             Example name <b>ETH/BTC-Kraken_2018-03-01</b>
           </div>
-          <br />
           <Field
             name="contractName"
             initialValue={this.props.contractName}
@@ -286,7 +289,6 @@ PricingStep = Form.create()(PricingStep);
 class ExpirationStep extends BaseStepComponent {
   render() {
     const {
-      contractName,
       expirationTimeStamp,
       form,
       gas,
@@ -299,10 +301,9 @@ class ExpirationStep extends BaseStepComponent {
         className={isSimplified ? 'step-container' : ''}
         onSubmit={this.handleSubmit.bind(this)}
         layout="vertical"
+        hideRequiredMark={true}
       >
-        <h1 className={isSimplified ? 'text-center' : ''}>
-          Set Expiration Time
-        </h1>
+        <h1 className={isSimplified ? 'text-center' : ''}>Set Expiration</h1>
         {!isSimplified && (
           <div>
             Upon reaching the expiration timestamp all open positions will
@@ -311,6 +312,12 @@ class ExpirationStep extends BaseStepComponent {
         )}
         <br />
         <div className={isSimplified ? 'step-inner-container' : ''}>
+          <h2>
+            Date & Time{' '}
+            <span style={{ fontSize: '14px' }}>
+              ({moment().format('[UTC/GMT]Z')})
+            </span>
+          </h2>
           <Field
             name="expirationTimeStamp"
             initialValue={
@@ -322,17 +329,6 @@ class ExpirationStep extends BaseStepComponent {
             }
             form={form}
           />
-          <br />
-          {isSimplified && (
-            <div>
-              <h2>Contract Name</h2>
-              <Field
-                name="contractName"
-                initialValue={contractName}
-                form={form}
-              />
-            </div>
-          )}
           {!isSimplified && (
             <GasPriceField form={form} gaslimit={gas} location={location} />
           )}
@@ -864,6 +860,7 @@ class ExchangeStep extends BaseStepComponent {
   }
 
   render() {
+    const { form, contractName } = this.props;
     return (
       <Form
         className="step-container"
@@ -887,6 +884,8 @@ class ExchangeStep extends BaseStepComponent {
             exchange={this.state.exchangeApi}
             onSelect={this.props.updateDeploymentState}
           />
+          <h2>Contract Name</h2>
+          <Field name="contractName" initialValue={contractName} form={form} />
         </div>
         <BiDirectionalNav text="View Pricing Rules" {...this.props} />
         <Link to={'/contract/deploy?mode=quick'}>
