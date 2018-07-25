@@ -1,4 +1,4 @@
-'use strict';
+
 
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'test') {
 
 // Setup mock localStorage
 // Use `var` instead of `let` to avoid CRA error during build
+if(process.env.NODE_ENV!=='development') {
 var localStorageMock = (function() {
   var store = {};
   return {
@@ -40,4 +41,6 @@ var localStorageMock = (function() {
     }
   };
 })();
+
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+}
