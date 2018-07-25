@@ -107,10 +107,12 @@ export async function processContractsList(
                     console.error(err);
                     contractJSON['collateralPoolBalance'] = 'NA';
                   });
-                localStorage.setItem(
-                  String(contract),
-                  JSON.stringify(contractJSON)
-                );
+                if (process.env.NODE_ENV === 'development') {
+                  localStorage.setItem(
+                    String(contract),
+                    JSON.stringify(contractJSON)
+                  );
+                }
                 return contractJSON;
               }
             }
